@@ -1,6 +1,10 @@
 //
 // Created by Manju Muralidharan on 10/19/25.
 //
+
+//Jasper McIntyre
+// October 29 2025
+//cs 210
 #include <iostream>
 #include <fstream>
 #include <stack>
@@ -91,12 +95,21 @@ int createLeafNodes(int freq[]) {
 int buildEncodingTree(int nextFree) {
     // TODO:
     // 1. Create a MinHeap object.
+    MinHeap heap;
     // 2. Push all leaf node indices into the heap.
+    for (int i=0; i<nextFree; i++) {
+        heap.push(i, weightArr);
+    }
+    if (heap.size==1) {
+        return heap.data[0];
+    }
+
     // 3. While the heap size is greater than 1:
     //    - Pop two smallest nodes
     //    - Create a new parent node with combined weight
     //    - Set left/right pointers
     //    - Push new parent index back into the heap
+    cout << "Heap initialized with" << heap.size << "nodes \n";
     // 4. Return the index of the last remaining node (root)
     return -1; // placeholder
 }
