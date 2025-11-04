@@ -158,12 +158,10 @@ void generateCodes(int root, string codes[]) {
         }
         //add right child
         if (rightArr[currentNode] !=-1) {
-            nodeStack.push(make_pair(leftArr[currentNode], currentCode + "1"));
-        }
-        //add left child
-        if (leftArr[currentNode] !=-1) {
             nodeStack.push(make_pair(rightArr[currentNode], currentCode + "1"));
         }
+        //add left child
+
         if (leftArr[currentNode] !=-1) {
             nodeStack.push(make_pair(leftArr[currentNode], currentCode + "0"));
         }
