@@ -5,10 +5,11 @@
 //Jasper McIntyre
 // October 29 2025
 //cs 210
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <stack>
 #include <string>
+#include <utility>
 #include "heap.h"
 using namespace std;
 
@@ -96,28 +97,51 @@ int buildEncodingTree(int nextFree) {
     // TODO:
     // 1. Create a MinHeap object.
     MinHeap heap;
+    if (heap.size==1) {
+        return heap.data[0];
+    }
     // 2. Push all leaf node indices into the heap.
     for (int i=0; i<nextFree; i++) {
         heap.push(i, weightArr);
     }
-    if (heap.size==1) {
-        return heap.data[0];
+
+    int currentNode = nextFree;
+
+    while (heap.size>1) {
+        int leftIdx = heap.pop(weightArr);
+        int rightIdx = heap.pop(weightArr);
+
+        weightArr[currentNode] = weightArr[leftIdx] + weightArr[rightIdx];
+        leftArr[currentNode] = leftIdx;
+        rightArr[currentNode] = rightIdx;
+        charArr[currentNode] = '\0';
+
+        heap.push(currentNode, weightArr);
+        currentNode++;
     }
+    int root = heap.pop(weightArr);
+    cout << "Tree built. root: " << root << "\n";
+    return root;
+
+
 
     // 3. While the heap size is greater than 1:
     //    - Pop two smallest nodes
     //    - Create a new parent node with combined weight
     //    - Set left/right pointers
     //    - Push new parent index back into the heap
-    cout << "Heap initialized with" << heap.size << "nodes \n";
+   // cout << "Heap initialized with" << heap.size << "nodes \n";
     // 4. Return the index of the last remaining node (root)
-    return -1; // placeholder
+
+   // return -1; // placeholder
 }
 
 // Step 4: Use an STL stack to generate codes
 void generateCodes(int root, string codes[]) {
     // TODO:
     // Use stack<pair<int, string>> to simulate DFS traversal.
+    stack <pair<int, string >> nodeStack;
+
     // Left edge adds '0', right edge adds '1'.
     // Record code when a leaf node is reached.
 }
