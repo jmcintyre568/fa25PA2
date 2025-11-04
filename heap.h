@@ -60,6 +60,9 @@ struct MinHeap {
             int smallest = pos;
 
             if (left<size && weightArr[data[left]]<weightArr[data[smallest]]) {
+                smallest = left;
+            }
+            if (right <size && weightArr[data[right]]<weightArr[data[smallest]]) {
                 smallest = right;
             }
             if (smallest != pos) {
